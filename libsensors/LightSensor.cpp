@@ -121,12 +121,10 @@ int LightSensor::readEvents(sensors_event_t* data, int count)
     while (count && mInputReader.readEvent(&event)) {
         int type = event->type;
         if (type == EV_REL) {
-                // Convert adc value to lux assuming:
-                // I = 10 * log(Ev) uA
-                // R = 47kOhm
-                // Max adc value 4095 = 3.3V
-                // 1/4 of light reaches sensor
-                mPendingEvent.light = event->value;
+                if(event->value < 0)
+		   mPendingEvent.light = 0;
+		else
+                   mPendingEvent.light = event->value;
         } else if (type == EV_SYN) {
             mPendingEvent.timestamp = timevalToNano(event->time);
             if (mEnabled) {

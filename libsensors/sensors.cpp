@@ -73,19 +73,19 @@ static const struct sensor_t sSensorList[] = {
         { "LIS3DH Acceleration Sensor",
           "STMicroelectronics",
           1, SENSORS_ACCELERATION_HANDLE,
-          SENSOR_TYPE_ACCELEROMETER, RANGE_A, RESOLUTION_A, 0.20f, 10000, { } },
+          SENSOR_TYPE_ACCELEROMETER, RANGE_A, RESOLUTION_A, 0.20f, 10000, 0, 0, { } },
         { "MS-3R (YAS532) Magnetic Sensor",
           "Yamaha Corporation",
           1, SENSORS_MAGNETIC_FIELD_HANDLE,
-          SENSOR_TYPE_MAGNETIC_FIELD, 2000.0f, 0.06f, 6.8f, 10000, { } },
+          SENSOR_TYPE_MAGNETIC_FIELD, 2000.0f, 0.06f, 6.8f, 10000, 0, 0, { } },
 	{ "MS-x Orientation Sensor",
           "Yamaha Corporation",
           1, SENSORS_ORIENTATION_HANDLE,
-          SENSOR_TYPE_ORIENTATION,  360.0f, CONVERT_O, 7.8f, 10000, { } },
+          SENSOR_TYPE_ORIENTATION,  360.0f, CONVERT_O, 7.8f, 10000, 0, 0, { } },
         { "AL3201 Light Sensor",
           "LITEON",
           1, SENSORS_LIGHT_HANDLE,
-          SENSOR_TYPE_LIGHT, 10240.0f, 1.0f, 0.75f, 0, { } },  
+          SENSOR_TYPE_LIGHT, 10240.0f, 1.0f, 0.75f, 0, 0, 0, { } },  
 };
 
 
