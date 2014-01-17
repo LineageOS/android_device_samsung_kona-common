@@ -82,10 +82,19 @@ static const struct sensor_t sSensorList[] = {
           "Yamaha Corporation",
           1, SENSORS_ORIENTATION_HANDLE,
           SENSOR_TYPE_ORIENTATION,  360.0f, CONVERT_O, 7.8f, 10000, 0, 0, { } },
-        { "AL3201 Light Sensor",
+	{ "GP2AP030 Light sensor",
+          "Sharp",
+          1, SENSORS_LIGHT_HANDLE,
+          SENSOR_TYPE_LIGHT, 10240.0f, 1.0f, 0.75f, 0, 0, 0, { } },
+        { "GP2AP030 Proximity sensor",
+          "Sharp",
+          1, SENSORS_PROXIMITY_HANDLE,
+          SENSOR_TYPE_PROXIMITY, 5.0f, 1.0f, 0.75f, 0, 0, 0, { } },
+/*        { "AL3201 Light Sensor",
           "LITEON",
           1, SENSORS_LIGHT_HANDLE,
           SENSOR_TYPE_LIGHT, 10240.0f, 1.0f, 0.75f, 0, 0, 0, { } },
+*/
 };
 
 
@@ -132,7 +141,7 @@ private:
         proximity       = 1,
         bosch           = 2,
         yamaha          = 3,
-	orientation 	= 4,        
+	orientation 	= 4,
 	numSensorDrivers,
         numFds,
     };
