@@ -19,7 +19,7 @@
  */
 
 #define LOG_TAG "audio_hw_primary"
-#define LOG_NDEBUG 0
+//#define LOG_NDEBUG 0
 
 #include <errno.h>
 #include <pthread.h>
@@ -230,14 +230,14 @@ static int set_bigroute_by_array(struct mixer *mixer, struct route_setting *rout
                 if (ret != 0) {
                     ALOGE("Failed to set '%s' to '%s'\n", route[i].ctl_name, route[i].strval);
                 } else {
-                    ALOGV("Set '%s' to '%s'\n", route[i].ctl_name, route[i].strval);
+                    //ALOGV("Set '%s' to '%s'\n", route[i].ctl_name, route[i].strval);
                 }
             } else {
                 ret = mixer_ctl_set_enum_by_string(ctl, "Off");
                 if (ret != 0) {
                     ALOGE("Failed to set '%s' to '%s'\n", route[i].ctl_name, route[i].strval);
                 } else {
-                    ALOGV("Set '%s' to '%s'\n", route[i].ctl_name, "Off");
+                    //ALOGV("Set '%s' to '%s'\n", route[i].ctl_name, "Off");
                 }
             }
         } else {
@@ -248,14 +248,14 @@ static int set_bigroute_by_array(struct mixer *mixer, struct route_setting *rout
                     if (ret != 0) {
                         ALOGE("Failed to set '%s' to '%d'\n", route[i].ctl_name, route[i].intval);
                     } else {
-                        ALOGV("Set '%s' to '%d'\n", route[i].ctl_name, route[i].intval);
+                        //ALOGV("Set '%s' to '%d'\n", route[i].ctl_name, route[i].intval);
                     }
                 } else {
                     ret = mixer_ctl_set_value(ctl, j, 0);
                     if (ret != 0) {
                         ALOGE("Failed to set '%s' to '%d'\n", route[i].ctl_name, route[i].intval);
                     } else {
-                        ALOGV("Set '%s' to '%d'\n", route[i].ctl_name, 0);
+                        //ALOGV("Set '%s' to '%d'\n", route[i].ctl_name, 0);
                     }
                 }
             }
@@ -300,8 +300,8 @@ static int set_route_by_array(struct mixer *mixer, struct route_setting *route,
             ALOGE("Failed to set '%s'.%d to %d\n",
              route[i].ctl_name, j, route[i].intval);
         } else {
-            ALOGV("Set '%s'.%d to %d\n",
-             route[i].ctl_name, j, route[i].intval);
+            //ALOGV("Set '%s'.%d to %d\n",
+             //route[i].ctl_name, j, route[i].intval);
         }
         }
         }
@@ -709,12 +709,16 @@ static void select_output_device(struct m0_audio_device *adev)
 
 static void select_input_device(struct m0_audio_device *adev)
 {
-    switch(adev->in_device) {
+    int input_device = AUDIO_DEVICE_BIT_IN | adev->in_device;
+	
+    switch(input_device) {
         case AUDIO_DEVICE_IN_BUILTIN_MIC:
             ALOGD("%s: AUDIO_DEVICE_IN_BUILTIN_MIC", __func__);
             break;
         case AUDIO_DEVICE_IN_BACK_MIC:
             ALOGD("%s: AUDIO_DEVICE_IN_BACK_MIC", __func__);
+            // Force use both mics for video recording
+            adev->in_device = (AUDIO_DEVICE_IN_BACK_MIC | AUDIO_DEVICE_IN_BUILTIN_MIC) & ~AUDIO_DEVICE_BIT_IN;
             break;
         case AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET:
             ALOGD("%s: AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET", __func__);
@@ -1412,13 +1416,17 @@ static int out_remove_audio_effect(const struct audio_stream *stream, effect_han
 static int start_input_stream(struct m0_stream_in *in)
 {
     int ret = 0;
+	int bt_on;
     struct m0_audio_device *adev = in->dev;
+	bt_on = in->device & AUDIO_DEVICE_IN_ALL_SCO;
 
     adev->active_input = in;
 
     if (adev->mode != AUDIO_MODE_IN_CALL) {
         adev->in_device = in->device;
         select_input_device(adev);
+		if(bt_on)
+			set_incall_device(adev);
     }
 
     if (in->aux_channels_changed)
@@ -1447,8 +1455,14 @@ static int start_input_stream(struct m0_stream_in *in)
                                         AUDIO_FORMAT_PCM_16_BIT,
                                         popcount(in->main_channels),
                                         in->requested_rate);
+										
+	ALOGD("%s: period_size: %d period_count: %d rate: %d channels: %d format: %d"
+			" main_channel: %d aux_channel: %d\n", __func__,in->config.period_size,
+			in->config.period_count,in->config.rate, in->config.channels, in->config.format,
+			in->main_channels, in->aux_channels);
 
     /* this assumes routing is done previously */
+	ALOGD("%s: Opening PCM Capture",__func__);
     in->pcm = pcm_open(CARD_DEFAULT, PORT_CAPTURE, PCM_IN, &in->config);
     if (!pcm_is_ready(in->pcm)) {
         ALOGE("cannot open pcm_in driver: %s", pcm_get_error(in->pcm));
@@ -1456,6 +1470,11 @@ static int start_input_stream(struct m0_stream_in *in)
         adev->active_input = NULL;
         return -ENOMEM;
     }
+	
+	if(bt_on) {
+	    ALOGD("%s: Starting BT Call",__func__);
+	    start_call(adev);
+	}
 
     /* force read and proc buf reallocation case of frame size or channel count change */
     in->read_buf_frames = 0;
@@ -2872,7 +2891,7 @@ static void adev_config_start(void *data, const XML_Char *elem,
         return;
     }
 
-    ALOGV("Parsing control %s => %s\n", name, val);
+    //ALOGV("Parsing control %s => %s\n", name, val);
 
     r = realloc(s->path, sizeof(*r) * (s->path_len + 1));
     if (!r) {
