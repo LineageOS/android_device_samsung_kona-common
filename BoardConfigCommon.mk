@@ -60,10 +60,10 @@ BOARD_SEPOLICY_UNION += \
     qmux.te \
     rild.te \
     secril.te \
+    servicemanager.te \
     shell.te \
     sysinit.te \
     system.te \
     ueventd.te \
     untrusted_app.te \
     wpa_supplicant.te
-
