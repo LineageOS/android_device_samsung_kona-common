@@ -1,0 +1,2 @@
+allow secril-daemon efs_file:dir search;
+allow secril-daemon radio_data_file:dir search;
