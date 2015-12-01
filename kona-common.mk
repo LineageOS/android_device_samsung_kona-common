@@ -48,6 +48,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/nvram_net.txt_murata:system/etc/wifi/nvram_net.txt_murata \
     $(LOCAL_PATH)/configs/80mac:system/etc/init.d/80mac
 
+# Required for our KK blobs
+PRODUCT_PACKAGES += \
+    libstlport
+
 # Charger
  PRODUCT_PACKAGES += \
     charger_res_images
