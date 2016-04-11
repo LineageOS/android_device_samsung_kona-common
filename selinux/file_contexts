@@ -14,6 +14,7 @@
 
 /dev/__cbd_msg_			u:object_r:radio_device:s0
 /dev/ttySAC0			u:object_r:serial_device:s0
+/dev/ttySAC1			u:object_r:gps_device:s0
 /dev/ttySAC2			u:object_r:serial_device:s0
 /dev/ttyGS0			u:object_r:serial_device:s0
 /dev/mali			u:object_r:gpu_device:s0
