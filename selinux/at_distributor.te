@@ -18,3 +18,5 @@ allow at_distributor efs_file:file { read open setattr };
 allow at_distributor self:capability { setuid fowner chown fsetid };
 allow at_distributor radio_data_file:dir search;
 allow at_distributor efs_file:dir search;
+allow at_distributor radio_data_file:dir write;
+allow at_distributor efs_file:dir { search getattr };
