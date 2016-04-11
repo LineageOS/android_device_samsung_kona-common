@@ -9,3 +9,4 @@ allow geomagneticd input_device:dir { read open };
 allow geomagneticd gps_data_file:file { read getattr open };
 allow geomagneticd sysfs:file write;
 allow geomagneticd input_device:dir search;
+allow geomagneticd system_data_file:dir write;

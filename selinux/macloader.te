@@ -1,0 +1,2 @@
+allow macloader efs_file:file read;
+allow macloader efs_file:dir search;
