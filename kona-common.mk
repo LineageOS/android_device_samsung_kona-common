@@ -35,6 +35,7 @@ PRODUCT_COPY_FILES += \
 
 # Packages
 PRODUCT_PACKAGES += \
+    libsamsung_symbols \
     libsecril-client \
     libsecril-client-sap \
     tiny_hw \
