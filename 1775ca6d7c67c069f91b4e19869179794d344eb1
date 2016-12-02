@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_99e67f44",
+        "filename": "libsensors/CompassSensor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 20
+      },
+      "writtenOn": "2016-12-02T18:53:48Z",
+      "side": 1,
+      "message": "missing a \u003e here",
+      "revId": "1775ca6d7c67c069f91b4e19869179794d344eb1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
