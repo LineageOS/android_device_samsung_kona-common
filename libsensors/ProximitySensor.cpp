@@ -27,6 +27,8 @@
 
 #include "ProximitySensor.h"
 
+#define PROXIMITY_THRESHOLD_GP2A  5.0f
+
 /*****************************************************************************/
 
 ProximitySensor::ProximitySensor()
