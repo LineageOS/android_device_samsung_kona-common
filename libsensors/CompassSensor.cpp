@@ -22,7 +22,8 @@
 #include <dirent.h>
 #include <sys/select.h>
 #include <cutils/log.h>
-#include <cstring>
+#include <string.h>
+
 
 #include "CompassSensor.h"
 
@@ -126,7 +127,7 @@ int CompassSensor::setDelay(int32_t handle, int64_t ns)
 
  //   ALOGD("CompassSensor::~setDelay(%d, %lld) val = %d", handle, ns, val);
 
-    strcpy(&input_sysfs_path[input_sysfs_path_len], "poll_delay");
+    strcpy(&input_sysfs_path[input_sysfs_path_len], "delay");
     fd = open(input_sysfs_path, O_RDWR);
     if (fd >= 0) {
         char buf[80];
