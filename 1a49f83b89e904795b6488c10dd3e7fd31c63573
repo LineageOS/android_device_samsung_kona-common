@@ -22,6 +22,30 @@
       "revId": "1a49f83b89e904795b6488c10dd3e7fd31c63573",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f681702_345ba52e",
+        "filename": "kona-common.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 12033
+      },
+      "writtenOn": "2016-12-22T21:32:26Z",
+      "side": 1,
+      "message": "yes, just moved from n5100/system.prop\nAnd already tested, of course.",
+      "parentUuid": "5f681702_b43175ef",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 30
+      },
+      "revId": "1a49f83b89e904795b6488c10dd3e7fd31c63573",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
