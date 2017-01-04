@@ -56,12 +56,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     camera.smdk4x12
 
-# Stock parameters
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.hwrotation=270 \
-    ro.sf.lcd_density=213 \
-    ro.hdcp2.rx=tz
-
 # RIL
 PRODUCT_PACKAGES += \
     libsecril-client \
