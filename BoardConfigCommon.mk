@@ -18,6 +18,10 @@
 
 LOCAL_PATH := device/samsung/kona-common
 
+# CMHW
+BOARD_HARDWARE_CLASS += \
+    $(LOCAL_PATH)/cmhw
+
 # For KK blobs
 MALLOC_SVELTE := true
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
