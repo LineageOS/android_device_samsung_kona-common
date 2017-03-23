@@ -42,3 +42,9 @@ NO_CHARGER_LED := true
 
 # Selinux
 BOARD_SEPOLICY_DIRS += device/samsung/kona-common/selinux
+
+# TWRP
+BOARD_HAS_FLIPPED_SCREEN := true
+RECOVERY_TOUCHSCREEN_FLIP_X := true
+RECOVERY_TOUCHSCREEN_SWAP_XY := true
+TW_THEME := landscape_mdpi
